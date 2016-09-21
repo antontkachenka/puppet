@@ -1,21 +1,37 @@
 if $::hostname == 'puppetserver' {
-     notice ( "Hostname is puppetserver" )
+     notice ( "Hostname is ${::hostname}" )
  
-       package { 'puppet-agent': 
-             ensure => 'latest',
+       package { 'puppetserver': 
+             ensure => 'installed',
                }
- 
-                 service { 'puppet':
-                       ensure => 'running',
-                         }
+       exec { "root_bash_profile":
+             command     => "source /root/.bash_profile",
+             provider => shell,
+            }
+
+       service { 'puppet':
+             ensure => 'running',
+               }
+
+       service { 'puppetserver':
+             ensure => 'running',
+               }
  
  }
  
  else {
-     notice ( "hostname = ${::hostname}" )
-       fail( "This os != centos" )
+     notice ( "Hostname is ${::hostname}" )
+       
+     package { 'puppet-agent':
+           ensure => 'latest',
+     }
+
+     service { 'puppetserver':
+           ensure => 'running',
+      
+}
          
          }
  
-         notice ( "something in the end of the pp" )
+    notice ( "something in the end of the pp" )
 

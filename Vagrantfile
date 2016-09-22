@@ -2,37 +2,40 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.define "master" do |puppetserver|
-    puppetserver.vm.box = "sbeliakou/centos-6.7-x86_64"
-    puppetserver.vm.hostname = "puppetserver"
-    puppetserver.vm.network "private_network", ip: "192.168.0.2"
-    puppetserver.vm.provider "virtualbox" do |cfg|
+  config.vm.define "master" do |master|
+    master.vm.box = "centos/7"
+    master.vm.hostname = "puppet"
+    master.vm.network "private_network", ip: "192.168.0.2"
+    master.vm.provider "virtualbox" do |cfg|
       cfg.cpus = 1
       cfg.memory = 4096
-    end
-    puppetserver.vm.provision "shell", inline: <<-SHELL
+    master.vm.provision "shell", inline: <<-SHELL
+    yum install -y epel-release
     yum install -y puppet
-    service puppet start
-    rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm 
+    service puppet start    
+    rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm 
     puppet apply /vagrant/exittask/manifest/init.pp
 SHELL
+
+    end
   end
 
-  config.vm.define "node" do |puppetserver|
-    puppetserver.vm.box = "sbeliakou/centos-6.7-x86_64"
-    puppetserver.vm.hostname = "node3"
-    puppetserver.vm.network "private_network", ip: "192.168.0.3"
-    puppetserver.vm.provider "virtualbox" do |cfg|
+  config.vm.define "node" do |node|
+    node.vm.box = "centos/7"
+    node.vm.hostname = "node3"
+    node.vm.network "private_network", ip: "192.168.0.3"
+    node.vm.provider "virtualbox" do |cfg|
       cfg.cpus = 1
-      cfg.memory = 1024
-    end
-    puppetserver.vm.provision "shell", inline: <<-SHELL
+      cfg.memory = 512
+    node.vm.provision "shell", inline: <<-SHELL
+    yum install -y epel-release
     yum install -y puppet
-    service puppet start
-    rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm 
+    service puppet start    
+    rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm 
     puppet apply /vagrant/exittask/manifest/init.pp
 SHELL
+
+    end
   end
- 
 
 end

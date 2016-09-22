@@ -36,21 +36,19 @@ if $::hostname == 'puppetserver' {
  else {
      notice ( "Hostname is ${::hostname}" )
      
-     file { '/etc/hosts':
-             content => template('/vagrant/exittask/templates/hosts_node.erb'),
-             owner   => root,
-             group   => root,
-             mode => '644'
-               }
+     host { 'puppet':
+           ip           => '192.168.0.2',
+           host_aliases => 'puppetserver.minsk.epam.com',
+          } 
        
      package { 'puppet-agent':
            ensure => 'latest',
      }
+          
 
      service { 'puppet':
-           ensure => 'running',
-      
-}
+           ensure => 'running', 
+             }
          
          }
  

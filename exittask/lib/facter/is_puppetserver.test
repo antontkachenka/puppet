@@ -1,0 +1,10 @@
+Facter.add(:is_puppetserver) do
+  setcode do
+  hostname = Facter.value(:fqdn)
+    if hostname == 'puppet.epam.minsk.com'
+      true
+    else
+      false
+    end
+  end
+end

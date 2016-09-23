@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
     yum install -y puppet
     service puppet start    
     rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm 
-    puppet apply /vagrant/exittask/manifest/init.pp
+    echo "hello master"
+    puppet apply -e 'include exittask' --modulepath=/vagrant 
 SHELL
 
     end
@@ -32,7 +33,8 @@ SHELL
     yum install -y puppet
     service puppet start    
     rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm 
-    puppet apply /vagrant/exittask/manifest/init.pp
+    echo "hello node"
+    puppet apply -e 'include exittask' --modulepath=/vagrant
 SHELL
 
     end

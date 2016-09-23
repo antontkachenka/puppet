@@ -23,3 +23,4 @@ Provide single puppet module which can setup both puppet master and puppet agent
  3. Your code is available for review as pull request to this repository
  
 ###Dead Line 26.09.2016 8AM MSQ time zone
+

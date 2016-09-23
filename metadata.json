@@ -1,0 +1,15 @@
+{
+  "name": "antoshka-test",
+  "version": "0.1.0",
+  "author": "Anton Tkachenka",
+  "summary": "In general module install puppet-agent and puppetserver",
+  "license": "Module doesn't use a license",
+  "source": "Here is https://github.com/antontkachenka/puppet",
+  "project_page": "There is more information in README file",
+  "issues_url": "It isn't possible",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+

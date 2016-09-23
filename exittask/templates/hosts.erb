@@ -1,7 +1,8 @@
 127.0.0.1       puppetserver    puppetserver
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-<% (3...254).each do |n| -%>
-192.168.0.<%=n-%>  node<%=n-%><%=@mydomain%>
+192.168.0.2 puppet puppet.minsk.epam.com
+<% (3...5).each do |n| -%>
+192.168.0.<%=n-%> node3 node<%=n-%><%=@mydomain%>
 <% end -%>
 

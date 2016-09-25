@@ -1,4 +1,4 @@
-# In this repo I present solution final task
+# In this repo I present final task solution
 
 At first I created Vagrant file, wich setup two VM: server and node. Both VM uses centos/7 box. 
 On provision step I install puppet from epel repository and call puppet module exittask.

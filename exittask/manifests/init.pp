@@ -2,7 +2,7 @@
 # Check VM by variable 'is_puppetserver'
 class exittask {
   notice( "The factor 'is_puppetserver' is ${::is_puppetserver}" )
-  if $::is_puppetserver == true {
+  if $::is_puppetserver == 'true' {
     include exittask::master
   }
   else {

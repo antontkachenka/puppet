@@ -1,6 +1,6 @@
 # This class install replace file 'hosts', install
 # puppetserver, puppet-lint and run puppetserver
-class exittask::master {
+class exittask::master ($puppet_server_version = 'installed') {
   notice ( "Hostname is ${::hostname}" )
   $mydomain = '.minsk.epam.com'
   file { '/etc/hosts':
@@ -10,13 +10,13 @@ class exittask::master {
     mode    => '0644',
   }
   package { 'puppetserver':
-    ensure  => 'installed',
+    ensure  => $puppet_server_version,
     require => File['/etc/hosts'],
   }
   exec { 'root_bash_profile':
     command  => 'source /root/.bash_profile',
     provider => shell,
-    require  => Package['puppetserver'],
+    subscribe => Package['puppetserver'],
   }
   service { 'puppetserver':
     ensure  => 'running',
